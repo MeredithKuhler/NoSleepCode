@@ -16,23 +16,18 @@ import javafx.stage.Stage;
 
 public class JavaFX extends Application
 {
+//======================== JavaFX Method ========================//
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
 		Scanner scan = new Scanner(System.in);
 		
-		//JFrame patientPortal = new JFrame("Patient Portal");
-		//JFrame messagingPortal = new JFrame("Messaging Portal");
-		//JFrame sendMessage = new JFrame("Send a Message");
-		//JFrame visitSummary = new JFrame("Visit Summary");
-		//JFrame accountInfo = new JFrame("Account Information");
-		//JFrame insuranceInfo = new JFrame("Insurance Page");
-		//JFrame pharmacyInfo = new JFrame("Pharmacy Information");
-		
 		Color BACKGROUND = Color.rgb(255, 153, 0); // not currently working
 		int PADDING_VALUE = 10;
 		Insets PADDING = new Insets(PADDING_VALUE);
 		
+		
+		//----- Global Styling -----//
 		String CSS_BOX_STYLE = // this will be edited
                 "-fx-border-insets: 5;\n" +
                 "-fx-border-width: 2;\n" +
@@ -50,12 +45,14 @@ public class JavaFX extends Application
 		String CSS_SUBMIT_BUTTON_STYLE =
 				"";
 		
+		
 		//----- Global Elements -----//
 		Image userIcon = new Image("UserIcon.png");
 		ImageView patientIcon = new ImageView(userIcon);
 		patientIcon.setFitHeight(50);
 		patientIcon.setFitWidth(50);
 		patientIcon.setPreserveRatio(true);
+		
 		
 		//----- Global Buttons -----//
 		Button PP_logOutButton = new Button("LOG OUT");
@@ -69,15 +66,10 @@ public class JavaFX extends Application
 		
 		HBox bottomButtons = new HBox(PADDING_VALUE);
 		bottomButtons.getChildren().addAll(submitButton, backButton);
-		
-		
-		/*
-		Label labelName = new Label("");
-		TextField textName = new TextField();
-		 */
 
 		
-        //======================== Patient Portal ========================//
+		
+	//======================== Patient Portal ========================//
 		Button PP_settingsButton = new Button("Account Settings");
 		
 		Label PP_patient = new Label("Patient Portal");
@@ -96,6 +88,7 @@ public class JavaFX extends Application
 		
 		
 		//===== Adding Elements to Frame =====//
+		
 		HBox PP_topButtons = new HBox(PADDING_VALUE);
 		PP_topButtons.setStyle(CSS_BOX_STYLE);
 		PP_topButtons.getChildren().addAll(PP_logOutButton, PP_settingsButton);
@@ -119,26 +112,27 @@ public class JavaFX extends Application
 		VBox PP_outerBox = new VBox();
 		PP_outerBox.getChildren().addAll(PP_topButtons, PP_profile, PP_navMenu);
 		
+		// patientPortalScene Scene
 		Scene patientPortalScene = new Scene(PP_outerBox, 800, 600);
 		patientPortalScene.setFill(BACKGROUND);
 		
 		
-		//======================== Messaging Portal ========================//
+		
+	//======================== Messaging Portal ========================//
 		
 		
 		
-        //======================== Send Message ========================//
+	//======================== Send Message ========================//
 		
 		
 		
-        //======================== Visit Summary ========================//
+	//======================== Visit Summary ========================//
 		
 		
 		
-		//======================== Account Information ========================//
+	//======================== Account Information ========================//
 		
 		//----- General Section -----//
-		
 		Label AI_patientNameLabel = new Label("Patient Name:");
 		TextField AI_name = new TextField();
 		
@@ -190,7 +184,9 @@ public class JavaFX extends Application
 		AI_patientName.getChildren().addAll(patientIcon, AI_nameBox);
 		AI_patientName.setStyle(CSS_BOX_STYLE);
 		
+		
 		//----- Birthday Boxes -----//
+		// Birthday Nested Boxes
 		HBox AI_bMonthBox = new HBox(PADDING_VALUE); // patient birth month label and field    
         AI_bMonthBox.getChildren().addAll(AI_bMonthLabel, AI_bMonth);
         
@@ -203,13 +199,14 @@ public class JavaFX extends Application
         HBox AI_bDateBox = new HBox(PADDING_VALUE);
         AI_bDateBox.getChildren().addAll(AI_bMonthBox, AI_bDayBox, AI_bYearBox);
         
-        
+        // Birthday Outer Box
         VBox AI_birthday = new VBox();
         AI_birthday.getChildren().addAll(AI_birthdayLabel, AI_bDateBox);
         AI_birthday.setStyle(CSS_BOX_STYLE);
         
+        
         //----- Contact Boxes -----//
-		
+        // Contact Nested Boxes
         HBox AI_cAddress1Box = new HBox(PADDING_VALUE);
         AI_cAddress1Box.getChildren().addAll(AI_cAddress1Label, AI_cAddress1);
         
@@ -234,7 +231,7 @@ public class JavaFX extends Application
         HBox AI_cAddrInfoBox = new HBox(PADDING_VALUE);
         AI_cAddrInfoBox.getChildren().addAll(AI_cCityBox, AI_cStateBox, AI_cZipBox);
         
-        
+        // Contact Outer Box
         VBox AI_contact = new VBox();
         AI_contact.getChildren().addAll(AI_contactInfoLabel, AI_cAddress1Box, AI_cAddress2Box,
         		AI_cAddrInfoBox, AI_cPhoneBox, AI_cEmailBox);
@@ -242,36 +239,36 @@ public class JavaFX extends Application
         
         
         //----- General -----//
-        
         VBox AI_outerBox = new VBox();
         AI_outerBox.getChildren().addAll(AI_patientName, AI_birthday, AI_contact, bottomButtons);
         AI_outerBox.setStyle(CSS_BOX_STYLE);
         
-        
+        // accountInfoScene Scene
         Scene accountInfoScene = new Scene(AI_outerBox, 800, 600);
         accountInfoScene.setFill(BACKGROUND);
         
         
         
-        //======================== Insurance Info ========================//
+	//======================== Insurance Info ========================//
         
         
         
-        //======================== Pharmacy Info ========================//
+	//======================== Pharmacy Info ========================//
 	
         
         
-        //======================== Control ========================//
+//======================== Scene Control ========================//
         
         primaryStage.show(); 
         
+        
         //----- Testing Panels -----//
-        //primaryStage.setScene(patientPortalScene);
-        primaryStage.setScene(accountInfoScene);
+        primaryStage.setScene(patientPortalScene);
+        //primaryStage.setScene(accountInfoScene);
 	}
 	
 	
-	//======================== Main Method ========================//
+//======================== Main Method ========================//
 	public static void main(String[] args)
 	{
 		Application.launch(args);
