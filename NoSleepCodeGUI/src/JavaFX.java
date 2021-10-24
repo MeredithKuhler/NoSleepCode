@@ -4,6 +4,7 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,17 +23,18 @@ public class JavaFX extends Application
 	{
 		Scanner scan = new Scanner(System.in);
 		
-		Color BACKGROUND = Color.rgb(255, 153, 0); // not currently working
+		
+		//----- Global Styling -----//
+		Color BACKGROUND = Color.rgb(255, 153, 0);
 		int PADDING_VALUE = 10;
 		Insets PADDING = new Insets(PADDING_VALUE);
 		
-		
-		//----- Global Styling -----//
 		String CSS_BOX_STYLE = // this will be edited
                 "-fx-border-insets: 5;\n" +
                 "-fx-border-width: 2;\n" +
                 "-fx-border-style: solid;\n" +
-                "-fx-padding: 5px";
+                "-fx-padding: 5px;\n" +
+                "-fx-background-color: transparent;";
 		
 		String CSS_LOGOUT_BUTTON_STYLE =
 				"-fx-background-color: #5A70A9;\n" +
@@ -78,7 +80,6 @@ public class JavaFX extends Application
 		//----- Navigation Menu -----//
 		//Image PP_insuranceIcon = new Image();		
 		Button PP_insuranceButton = new Button("Insurance");
-		//PP_insuranceButton.setStyle("-fx-background-color: transparent;");
 		//Image PP_pharmacyIcon = new Image();
 		Button PP_pharmacyButton = new Button("Pharmacy Information");
 		//Image PP_messagesIcon = new Image();
@@ -111,6 +112,7 @@ public class JavaFX extends Application
 		//----- General -----//
 		VBox PP_outerBox = new VBox();
 		PP_outerBox.getChildren().addAll(PP_topButtons, PP_profile, PP_navMenu);
+		PP_outerBox.setStyle(CSS_BOX_STYLE);
 		
 		// patientPortalScene Scene
 		Scene patientPortalScene = new Scene(PP_outerBox, 800, 600);
@@ -127,6 +129,22 @@ public class JavaFX extends Application
 		
 		
 	//======================== Visit Summary ========================//
+		
+		Label VS_visitSummaryLabel = new Label("Visit Summary");
+		
+		TextField VS_visitSummaryText = new TextField();
+		
+		
+		
+		//===== Adding Elements to Frame =====//
+		
+		VBox VS_outerBox = new VBox();
+		VS_outerBox.setStyle(CSS_BOX_STYLE);
+		VS_outerBox.getChildren().addAll(backButton, VS_visitSummaryLabel, VS_visitSummaryText);
+		
+		// Visit Summary Scene
+		Scene visitSummaryScene = new Scene(VS_outerBox, 800, 600);
+		visitSummaryScene.setFill(BACKGROUND);
 		
 		
 		
@@ -180,9 +198,9 @@ public class JavaFX extends Application
 		HBox AI_nameBox = new HBox(PADDING_VALUE); // patient name label and field
 		AI_nameBox.getChildren().addAll(AI_patientNameLabel, AI_name);
 		
-		VBox AI_patientName = new VBox();
-		AI_patientName.getChildren().addAll(patientIcon, AI_nameBox);
-		AI_patientName.setStyle(CSS_BOX_STYLE);
+		VBox AI_profile = new VBox();
+		AI_profile.getChildren().addAll(patientIcon, AI_nameBox);
+		AI_profile.setStyle(CSS_BOX_STYLE);
 		
 		
 		//----- Birthday Boxes -----//
@@ -240,7 +258,7 @@ public class JavaFX extends Application
         
         //----- General -----//
         VBox AI_outerBox = new VBox();
-        AI_outerBox.getChildren().addAll(AI_patientName, AI_birthday, AI_contact, bottomButtons);
+        AI_outerBox.getChildren().addAll(AI_profile, AI_birthday, AI_contact, bottomButtons);
         AI_outerBox.setStyle(CSS_BOX_STYLE);
         
         // accountInfoScene Scene
@@ -264,6 +282,7 @@ public class JavaFX extends Application
         
         //----- Testing Panels -----//
         primaryStage.setScene(patientPortalScene);
+        //primaryStage.setScene(visitSummaryScene);
         //primaryStage.setScene(accountInfoScene);
 	}
 	
