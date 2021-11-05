@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class DataSystem {
     private Account[] accountList;
     private Account currentUser;
+    private Patient[] patientList;
 
     public DataSystem(Account[] accountList, Account currentUser) {
         this.accountList = accountList;
@@ -37,15 +38,17 @@ public class DataSystem {
         return currentUser;
     }
 
-    public ArrayList[] getPatient() {
-        ArrayList patient = new ArrayList();
+    public ArrayList<Account> getPatient() {
+        ArrayList<Account> patient = new ArrayList<Account>();
         for (int i = 0; i < accountList.length; i++) {
-            if(accountList[i] instanceof Patient) {
-                //add patient to list of patients and then return that list of patients
-                patient.add(accountList[i]);
+            for (int j = 0; j < patientList.length; j++) {
+                if((accountList[i].getfirstName() + accountList[i].getLastName()) == (patientList[j].getFirstName() + patientList[j].getLastName())) {
+                    //add patient to list of patients and then return that list of patients
+                    patient.add(accountList[i]);
+                }
             }
         }
-        //return patient;
+        return patient;
     }
 
     public void setCurrentUser(Account currentUser) {
