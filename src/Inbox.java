@@ -2,24 +2,24 @@ import java.util.ArrayList;
 
 public class Inbox {
     private int accountID;
-    private Message[] sentMessages;
-    private Message[] receivedMessages;
+    private ArrayList<Message> sentMessages;
+    private ArrayList<Message> receivedMessages;
 
     public Inbox(int accountID) {
         this.accountID = accountID;
-        sentMessages = null;
-        receivedMessages = null;
+        sentMessages = new ArrayList<Message>();
+        receivedMessages = new ArrayList<Message>();
     }
 
     public int getAccountID() {
         return accountID;
     }
 
-    public Message[] getSentMessages() {
+    public ArrayList<Message> getSentMessages() {
         return sentMessages;
     }
 
-    public Message[] getReceivedMessages() {
+    public ArrayList<Message> getReceivedMessages() {
         return receivedMessages;
     }
 
@@ -27,11 +27,11 @@ public class Inbox {
         this.accountID = accountID;
     }
 
-    public void setSentMessages(Message[] sentMessages) {
-        this.sentMessages = sentMessages;
+    public void addSentMessages(Message sentMessages) {
+        this.sentMessages.add(sentMessages);
     }
 
-    public void setReceivedMessages(Message[] receivedMessages) {
-        this.receivedMessages = receivedMessages;
+    public void addReceivedMessages(Message receivedMessages) {
+        this.receivedMessages.add(receivedMessages);
     }
 }
