@@ -1,23 +1,46 @@
+import java.io.*;
 import java.util.ArrayList;
 
 public class DataSystem {
-    private Account[] accountList;
+    //private Account[] accountList;
+    private ArrayList<Account> accountList;
     private Account currentUser;
     private Patient[] patientList;
 
-    public DataSystem(Account[] accountList, Account currentUser) {
-        this.accountList = accountList;
+    public DataSystem(Account currentUser) {
         this.currentUser = currentUser;
+        this.accountList = new ArrayList<Account>();
     }
 
-    public Account[] getAccountList() {
+    public void readAccountData() {
+        try {
+            FileInputStream inFile = new FileInputStream("accounts.txt");
+            ObjectInputStream inObj = new ObjectInputStream(inFile);
+            this.accountList = (ArrayList<Account>) inObj.readObject();
+        } catch (Exception ex) {
+            System.out.println("accounts.txt Not Found");
+        }
+    }
+
+    public void writeAccountData() {
+        if (!this.accountList.isEmpty()) {
+            try {
+                FileOutputStream outFile = new FileOutputStream("accounts.txt");
+                ObjectOutputStream outObj = new ObjectOutputStream(outFile);
+                outObj.writeObject(accountList);
+                outObj.close();
+            } catch (Exception ex) {
+                System.out.println("File Error");
+            }
+        }
+    }
+
+    public ArrayList<Account> getAccountList() {
         return accountList;
     }
 
     public void addAccount(Account newAccount) {
-        Account[] newAccountList = new Account[(this.accountList.length + 1)];
-        newAccountList[this.accountList.length] = newAccount;
-        this.accountList = newAccountList;
+        this.accountList.add(newAccount);
     }
 
     void sendPrescription(Prescription newPrescription, Visit visit) {
@@ -27,8 +50,8 @@ public class DataSystem {
     }
 
     public void sendMessage(Account currentUser, Account otherUser, int otherUserID, Message message) {
-        for (int i = 0; i < accountList.length; i++) {
-            if(accountList[i] == otherUser) {
+        for (int i = 0; i < accountList.size(); i++) {
+            if(accountList.get(i). == otherUser) {
                 message.setRecipientID(otherUserID);
             }
         }
