@@ -6,7 +6,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,9 +24,17 @@ public class JavaFX extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		Scanner scan = new Scanner(System.in);
+
 		
 		
-		//----- Global Styling -----//
+//=========================================================================================================================//
+// 
+// Section: Global Pages & Styling
+// Description: Pages used by all users and elements/styling that will be needed on all 3 portals
+//
+//=========================================================================================================================//
+		
+		
 		Color BACKGROUND = Color.rgb(255, 153, 0);
 		int PADDING_VALUE = 10;
 		Insets PADDING = new Insets(PADDING_VALUE);
@@ -68,6 +78,122 @@ public class JavaFX extends Application
 		
 		HBox bottomButtons = new HBox(PADDING_VALUE);
 		bottomButtons.getChildren().addAll(submitButton, backButton);
+
+		
+		
+	//======================== Sign In ========================//
+		Label SI_nameLabel = new Label("Full Name");
+		TextField SI_nameField = new TextField();
+		
+		Label SI_passLabel = new Label("Password");
+		PasswordField SI_passField = new PasswordField();
+		
+		Button SI_siButton = new Button("Sign In");
+		
+		Label SI_newAccount = new Label("Don't have an account?");
+		Button SI_newAccountButton = new Button("Create Account");
+
+		
+		//===== Adding Elements to Frame =====//
+		VBox SI_userInfo = new VBox(PADDING_VALUE);
+		SI_userInfo.getChildren().addAll(patientIcon, SI_nameLabel, SI_nameField, SI_passLabel, SI_passField);
+		
+		VBox SI_buttons = new VBox(PADDING_VALUE);
+		SI_buttons.getChildren().addAll(SI_siButton, SI_newAccount, SI_newAccountButton);
+		
+		VBox SI_outerBox = new VBox();
+		SI_outerBox.setStyle(CSS_BOX_STYLE);
+		SI_outerBox.getChildren().addAll(SI_userInfo, SI_buttons);
+		
+		Scene signInScene = new Scene(SI_outerBox, 800, 600);
+		signInScene.setFill(BACKGROUND);
+		
+		
+		
+	//======================== Sign Up ========================//
+		Label SU_nameLabel = new Label("Full Name");
+		TextField SU_nameField = new TextField();
+		
+		Label SU_passLabel = new Label("Password");
+		PasswordField SU_passField = new PasswordField();
+		
+		Label SU_reenterPass = new Label("Re-enter Password");
+		PasswordField SU_reenterPassField = new PasswordField();
+		
+		Button SU_suButton = new Button("Create Account");
+		
+		Label SU_logIn = new Label("Already have an account?");
+		Button SU_logInButton = new Button("Sign In");
+
+		
+		//===== Adding Elements to Frame =====//
+		VBox SU_passEnterBox = new VBox(PADDING_VALUE);
+		SU_passEnterBox.getChildren().addAll(SU_passLabel, SU_passField, SU_reenterPass, SU_reenterPassField);
+		
+		VBox SU_userInfo = new VBox(PADDING_VALUE);
+		SU_userInfo.getChildren().addAll(patientIcon, SU_nameLabel, SU_nameField, SU_passEnterBox);
+		
+		VBox SU_buttons = new VBox(PADDING_VALUE);
+		SU_buttons.getChildren().addAll(SU_suButton, SU_logIn, SU_logInButton);
+		
+		VBox SU_outerBox = new VBox();
+		SU_outerBox.setStyle(CSS_BOX_STYLE);
+		SU_outerBox.getChildren().addAll(SU_userInfo, SU_buttons);
+		
+		Scene signUpScene = new Scene(SU_outerBox, 800, 600);
+		signUpScene.setFill(BACKGROUND);
+		
+		
+		
+	//======================== Messaging Portal ========================//
+		
+		
+		
+		
+		
+	//======================== Send Message ========================//
+		//----- Header -----//
+		ComboBox<String> SM_recipients = new ComboBox<String>();
+		SM_recipients.getItems().add("Recipient 1");
+		SM_recipients.getItems().add("Recipient 2");
+		SM_recipients.getItems().add("Recipient 3");
+		
+		TextField SM_subject = new TextField();
+		SM_subject.setText("Subject");
+		
+		//----- Text Box -----//
+		Label SM_messageLabel = new Label("Message:");
+		TextField SM_messageEntry = new TextField();
+		
+		
+		//===== Adding Elements to Frame =====//
+		VBox SM_address = new VBox(PADDING_VALUE);
+		SM_address.getChildren().addAll(SM_recipients, SM_subject);
+		
+		VBox SM_message = new VBox(PADDING_VALUE);
+		SM_message.getChildren().addAll(SM_messageLabel, SM_messageEntry);
+		
+		VBox SM_outerBox = new VBox();
+		SM_outerBox.setStyle(CSS_BOX_STYLE);
+		SM_outerBox.getChildren().addAll(SM_address, SM_message, bottomButtons);
+		
+		Scene sendMessageScene = new Scene(SM_outerBox, 800, 600);
+		sendMessageScene.setFill(BACKGROUND);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//=========================================================================================================================//
+//
+// Section: Patient Portal Pages
+// Description: Pages accessible to the patient user-type
+//
+//=========================================================================================================================//
 
 		
 		
@@ -117,14 +243,6 @@ public class JavaFX extends Application
 		// patientPortalScene Scene
 		Scene patientPortalScene = new Scene(PP_outerBox, 800, 600);
 		patientPortalScene.setFill(BACKGROUND);
-		
-		
-		
-	//======================== Messaging Portal ========================//
-		
-		
-		
-	//======================== Send Message ========================//
 		
 		
 		
@@ -272,18 +390,62 @@ public class JavaFX extends Application
         
         
 	//======================== Pharmacy Info ========================//
+		
+		
+		
+		
+		
+		
+		
+        
+//=========================================================================================================================//
+//
+// Section: Nurse Portal Pages
+// Description: 
+//
+//=========================================================================================================================//
+
+		
+		
+		
+		
+		
+		
+		
+//=========================================================================================================================//
+//
+// Section: Doctor Portal Pages
+// Description: Pages shown for doctor type users (excluding pages already created for the nurse portal
+//
+//=========================================================================================================================//		
+		
 	
-        
-        
-//======================== Scene Control ========================//
+		
+		
+		
+		
+//=========================================================================================================================//
+//
+// Section: Scene Control
+// Description: 
+//
+//=========================================================================================================================//
         
         primaryStage.show(); 
         
         
-        //----- Testing Panels -----//
-        primaryStage.setScene(patientPortalScene);
-        //primaryStage.setScene(visitSummaryScene);
+		//===== Testing Panels =====//
+        
+        //----- general scenes -----//
+        //primaryStage.setScene(signInScene);
+        //primaryStage.setScene(signUpScene);
+        //primaryStage.setScene(sendMessageScene);
+        //primaryStage.setScene(messagingPortalScene);
+        
+        //----- patient portal -----//
+		//primaryStage.setScene(patientPortalScene);
         //primaryStage.setScene(accountInfoScene);
+		//primaryStage.setScene(visitSummaryScene);
 	}
 	
 	
@@ -298,5 +460,10 @@ public class JavaFX extends Application
 
 
 
-
+//=========================================================================================================================//
+//
+//Section: 
+//Description: 
+//
+//=========================================================================================================================//	
 
