@@ -1,13 +1,13 @@
-import java.io.FileInputStream;
 import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class JavaFX extends Application
@@ -56,7 +57,16 @@ public class JavaFX extends Application
 		
 		String CSS_SUBMIT_BUTTON_STYLE =
 				"";
-		
+
+		String TITLE_FORMAT =
+				"-fx-text-fill:BLACK; -fx-font-size: 40;";
+
+		String SUBTITLE_FORMAT =
+				"-fx-text-fill:BLACK; -fx-font-size: 25;";
+
+		String SMALLSUBTITLE_FORMAT =
+				"-fx-text-fill:BLACK; -fx-font-size: 14;";
+
 		
 		//----- Global Elements -----//
 		Image userIcon = new Image("UserIcon.png");
@@ -386,31 +396,422 @@ public class JavaFX extends Application
         
         
 	//======================== Insurance Info ========================//
-        
-        
+
+		//----- Insurance Information -----//
+		Label II_insuranceLabel = new Label("Insurance");
+		II_insuranceLabel.setStyle(TITLE_FORMAT);
+		II_insuranceLabel.setMinHeight(25);
+
+		Label II_healthProviderLabel = new Label("Healthcare Provider:	");
+		TextField II_healthProvider = new TextField();
+		II_healthProviderLabel.setMinHeight(25);
+
+		Label II_subscriberNameLabel = new Label("Subscriber Name:	");
+		TextField II_subscriberName = new TextField();
+		II_subscriberNameLabel.setMinHeight(25);
+
+		Label II_subscriberNumberLabel = new Label("Subscriber Number:	");
+		TextField II_subscriberNumber = new TextField();
+		II_subscriberNumberLabel.setMinHeight(25);
+
+		Label II_groupNumberLabel = new Label("Group Number:	");
+		TextField II_groupNumber = new TextField();
+		II_groupNumberLabel.setMinHeight(25);
+
+
+		Button II_addCoverageLabel = new Button("Add a Coverage");
+		Button II_backButton = new Button("Back");
+		II_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+
+		//===== Setting Up Scene =====//
+		VBox II_leftBox = new VBox();
+		II_leftBox.setStyle(CSS_BOX_STYLE);
+		II_leftBox.getChildren().addAll(II_healthProviderLabel, II_subscriberNameLabel,
+				II_subscriberNumberLabel, II_groupNumberLabel, II_addCoverageLabel);
+		II_leftBox.setStyle("-fx-border-color: transparent;");
+		II_leftBox.setSpacing(15);
+
+		VBox II_rightBox = new VBox();
+		II_rightBox.setStyle(CSS_BOX_STYLE);
+		II_rightBox.getChildren().addAll(II_healthProvider, II_subscriberName,
+				II_subscriberNumber, II_groupNumber);
+		II_rightBox.setStyle("-fx-border-color: transparent;");
+		II_rightBox.setSpacing(18);
+
+		VBox II_backBox = new VBox();
+		II_backBox.setStyle(CSS_BOX_STYLE);
+		II_backBox.setAlignment(Pos.CENTER_RIGHT);
+		II_backBox.setStyle("-fx-border-color: transparent;");
+		II_backBox.getChildren().addAll(II_backButton);
+
+		HBox II_innerBox = new HBox();
+		II_innerBox.setStyle(CSS_BOX_STYLE);
+		II_innerBox.getChildren().addAll(II_leftBox, II_rightBox);
+
+		VBox II_outerBox = new VBox();
+		II_outerBox.setStyle(CSS_BOX_STYLE);
+		II_outerBox.getChildren().addAll(II_insuranceLabel, II_innerBox, II_backBox);
+
+		Scene insuranceInfoScene = new Scene(II_outerBox, 800, 600);
+		insuranceInfoScene.setFill(BACKGROUND);
+
         
 	//======================== Pharmacy Info ========================//
 		
-		
-		
-		
-		
-		
+		//----- Pharmacy Titles -----//
+		Label PI_pharmacyInfoLabel = new Label("Pharmacy Information");
+		PI_pharmacyInfoLabel.setStyle(TITLE_FORMAT);
+		PI_pharmacyInfoLabel.setMinWidth(50);
+		PI_pharmacyInfoLabel.setMinHeight(50);
+
+		Label PI_pharmacyNameLabel = new Label("Pharmacy");
+		PI_pharmacyNameLabel.setStyle(SUBTITLE_FORMAT);
+		TextField PI_pharmacyName = new TextField();
+
+		//---- Contact Information ----//
+		Label PI_contactInfoLabel = new Label("Contact Information");
+		PI_contactInfoLabel.setStyle(SUBTITLE_FORMAT);
+
+		Label PI_faxLabel = new Label("Fax Number:");
+		TextField PI_fax = new TextField();
+		PI_faxLabel.setMinHeight(25);
+
+		Label PI_emailLabel = new Label("Email:");
+		TextField PI_email = new TextField();
+		PI_emailLabel.setMinHeight(25);
+
+		Label PI_addressLabel1 = new Label("Address Line 1:");
+		TextField PI_address1 = new TextField();
+		PI_addressLabel1.setMinHeight(25);
+
+		Label PI_addressLabel2 = new Label("Address Line 2:");
+		TextField PI_address2 = new TextField();
+		PI_addressLabel2.setMinHeight(25);
+
+		Label PI_cityLabel = new Label("City:");
+		TextField PI_city = new TextField();
+		PI_cityLabel.setMinHeight(25);
+
+		Label PI_stateLabel = new Label("State:");
+		TextField PI_state = new TextField();
+		PI_stateLabel.setMinHeight(25);
+
+		Label PI_zipLabel = new Label("Zip Code:");
+		TextField PI_zip = new TextField();
+		PI_zipLabel.setMinHeight(25);
+
+		Button PI_backButton = new Button("Back");
+		PI_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+
+		//===== Setting Up Scene =====//
+
+		VBox PI_leftBox = new VBox();
+		PI_leftBox.setStyle(CSS_BOX_STYLE);
+		PI_leftBox.getChildren().addAll(PI_pharmacyNameLabel, PI_pharmacyName, PI_contactInfoLabel,
+				PI_faxLabel, PI_emailLabel, PI_addressLabel1, PI_addressLabel2, PI_cityLabel, PI_stateLabel, PI_zipLabel);
+		PI_leftBox.setStyle("-fx-border-color: transparent;");
+		PI_leftBox.setSpacing(15);
+
+		VBox PI_rightBox = new VBox();
+		PI_rightBox.setStyle(CSS_BOX_STYLE);
+		PI_rightBox.getChildren().addAll(new Label("\n\n\n\n\n\n\n"),PI_fax, PI_email, PI_address1, PI_address2,
+				PI_city, PI_state, PI_zip);
+		PI_rightBox.setStyle("-fx-border-color: transparent;");
+		PI_rightBox.setSpacing(17);
+
+		VBox PI_backBox = new VBox();
+		PI_backBox.setStyle(CSS_BOX_STYLE);
+		PI_backBox.setAlignment(Pos.CENTER_RIGHT);
+		PI_backBox.setStyle("-fx-border-color: transparent;");
+		PI_backBox.getChildren().addAll(PI_backButton);
+
+		HBox PI_innerBox = new HBox();
+		PI_innerBox.setStyle(CSS_BOX_STYLE);
+		PI_innerBox.getChildren().addAll(PI_leftBox, PI_rightBox);
+
+		VBox PI_outerBox = new VBox();
+		PI_outerBox.setStyle(CSS_BOX_STYLE);
+		PI_outerBox.getChildren().addAll(PI_pharmacyInfoLabel, PI_innerBox, PI_backBox);
+
+
+		Scene pharmacyInfoScene = new Scene(PI_outerBox, 800, 600);
+		pharmacyInfoScene.setFill(BACKGROUND);
+
 		
         
 //=========================================================================================================================//
 //
 // Section: Nurse Portal Pages
-// Description: 
+// Description: Pages shown for nurse type users.  These may also be seen by Doctor users.
 //
 //=========================================================================================================================//
 
-		
-		
-		
-		
-		
-		
+		//===== Patient Selection =====//
+
+		Label PS_nameLabel = new Label("Patient Name:");
+		TextField PS_patientName = new TextField();
+
+		Label PS_MRnLabel = new Label("MRn:");
+		TextField PS_MRn = new TextField();
+
+		Label PS_dobLabel = new Label("Date of Birth:");
+		TextField PS_dob = new TextField();
+
+		Button PS_editPatientFile = new Button("Edit Patient File");
+
+
+		//===== Patient Information View =====//
+
+		Label PIV_patientInfoViewLabel = new Label("Patient Information View");
+
+		Label PIV_logVisitLabel = new Label("Log a Visit");
+		//Button PIV_logVisitButton = new Button();
+		//Image PIV_logVisitIcon = new Image();
+
+		Label PIV_previousVisitLabel = new Label("Previous Visits");
+		//Button PIV_prevVisitButton = new Button();
+		//Image PIV_prevVisitIcon = new Image();
+
+		Label PIV_insPharContLabel = new Label("Insurance, Pharmacy and Contact");
+		//Button PIV_insPharContButton = new Button();
+		//Image PIV_insPharContIcon = new Image();
+
+		Label PIV_sendPrescriptionLabel = new Label("Send a Prescription\n*Doctors Only*");
+		//Button PIV_sendPrescriptionButton = new Button();
+		//Image PIV_sendPrescriptionIcon = new Image();
+
+
+
+		//===== Log a Visit =====//
+
+		Label LV_logVisitLabel = new Label("Log a Visit");
+		LV_logVisitLabel.setStyle(TITLE_FORMAT);
+
+		Label LV_takeVitalsLabel = new Label("Take Vitals:");
+		LV_takeVitalsLabel.setStyle(SUBTITLE_FORMAT);
+
+		Label LV_weightLabel = new Label("Weight:");
+		TextField LV_weight = new TextField();
+		LV_weightLabel.setMinHeight(25);
+
+		Label LV_heightLabel = new Label("Height:");
+		TextField LV_height = new TextField();
+		LV_heightLabel.setMinHeight(25);
+
+		Label LV_tempLabel = new Label("Temperature:");
+		TextField LV_temp = new TextField();
+		LV_tempLabel.setMinHeight(25);
+
+		Label LV_bloodLabel = new Label("Blood Pressure:");
+		TextField LV_blood = new TextField();
+		LV_bloodLabel.setMinHeight(25);
+
+		Label LV_over12Label = new Label("Patient over 12:");
+		LV_over12Label.setMinHeight(25);
+		CheckBox LV_yesBox = new CheckBox("Yes");
+
+		Label LV_allergiesLabel = new Label("Allergies:");
+		TextField LV_allergies = new TextField();
+		LV_allergiesLabel.setMinHeight(25);
+
+		Label LV_healthConcernsLabel = new Label("Health Concerns:");
+		TextField LV_healthConcerns = new TextField();
+		LV_healthConcernsLabel.setMinHeight(25);
+
+		Label LV_dateLabel = new Label("Date:");
+		TextField LV_date = new TextField();
+		LV_dateLabel.setMinHeight(25);
+
+		Button LV_backButton = new Button("Back");
+		LV_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+
+		Button LV_submitButton = new Button("Submit");
+		LV_submitButton.setStyle(CSS_SUBMIT_BUTTON_STYLE);
+
+
+		//---- Setting Up Scene ----//
+
+		VBox LV_leftBox = new VBox();
+		LV_leftBox.setStyle(CSS_BOX_STYLE);
+		LV_leftBox.getChildren().addAll(LV_takeVitalsLabel, LV_weightLabel, LV_heightLabel, LV_tempLabel,
+				LV_bloodLabel, LV_over12Label, LV_allergiesLabel, LV_healthConcernsLabel, LV_dateLabel);
+		LV_leftBox.setStyle("-fx-border-color: transparent;");
+		LV_leftBox.setSpacing(15);
+
+		VBox LV_rightBox = new VBox();
+		LV_rightBox.setStyle(CSS_BOX_STYLE);
+		LV_rightBox.getChildren().addAll(new Label("\n\n"), LV_weight, LV_height, LV_temp,
+				LV_blood, LV_yesBox, LV_allergies, LV_healthConcerns, LV_date);
+		LV_rightBox.setStyle("-fx-border-color: transparent;");
+		LV_rightBox.setSpacing(17);
+
+		HBox LV_backBox = new HBox();
+		LV_backBox.setStyle(CSS_BOX_STYLE);
+		LV_backBox.setAlignment(Pos.CENTER_RIGHT);
+		LV_backBox.setStyle("-fx-border-color: transparent;");
+		LV_backBox.getChildren().addAll(LV_submitButton, LV_backButton);
+		LV_backBox.setSpacing(18);
+
+		HBox LV_innerBox = new HBox();
+		LV_innerBox.setStyle(CSS_BOX_STYLE);
+		LV_innerBox.getChildren().addAll(LV_leftBox, LV_rightBox);
+
+		VBox LV_outerBox = new VBox();
+		LV_outerBox.setStyle(CSS_BOX_STYLE);
+		LV_outerBox.getChildren().addAll(LV_logVisitLabel, LV_innerBox, LV_backBox);
+
+
+		Scene logVisitScene = new Scene(LV_outerBox, 800, 600);
+		logVisitScene.setFill(BACKGROUND);
+
+
+
+		//===== Previous Visits =====//
+
+		Label PV_prevVisitsLabel = new Label("Previous Visits");
+
+		//TableColumn PV_visit1 = new TableColumn
+
+
+		//===== Insurance, Pharmacy and Contact =====//
+
+		Label IPC_insurePharContLabel = new Label("Insurance, Pharmacy and Contact");
+		IPC_insurePharContLabel.setStyle(TITLE_FORMAT);
+
+		Label IPC_MRnLabel = new Label("MRn:");
+		TextField IPC_MRn = new TextField();
+		IPC_MRnLabel.setMinHeight(25);
+
+		Label IPC_patientNameLabel = new Label("Patient Name:");
+		TextField IPC_patientName = new TextField();
+		IPC_patientNameLabel.setMinHeight(25);
+
+		Label IPC_dobLabel = new Label("Date of Birth:");
+		TextField IPC_dob = new TextField();
+		IPC_dobLabel.setMinHeight(25);
+
+		Label IPC_patientNumLabel = new Label("Phone #:");
+		TextField IPC_patientNum = new TextField();
+		IPC_patientNumLabel.setMinHeight(25);
+
+		Label IPC_phoneNumLabel1 = new Label("Phone #:");
+		TextField IPC_phoneNum1 = new TextField();
+		IPC_phoneNumLabel1.setMinHeight(25);
+
+		Label IPC_phoneNumLabel2 = new Label("Phone #:");
+		TextField IPC_phoneNum2 = new TextField();
+		IPC_phoneNumLabel2.setMinHeight(25);
+
+		Label IPC_emailLabel = new Label("Email:");
+		TextField IPC_email = new TextField();
+		IPC_emailLabel.setMinHeight(25);
+
+		Label IPC_emergencyContactLabel1 = new Label("Emergency Contact Information");
+		IPC_emergencyContactLabel1.setStyle(SMALLSUBTITLE_FORMAT);
+
+		Label IPC_emergencyContactLabel2 = new Label("Emergency Contact Information");
+		IPC_emergencyContactLabel2.setStyle(SMALLSUBTITLE_FORMAT);
+
+		Label IPC_nameLabel1 = new Label("Name:");
+		TextField IPC_name1 = new TextField();
+
+		Label IPC_nameLabel2 = new Label("Name:");
+		TextField IPC_name2 = new TextField();
+
+		Label IPC_relationshipLabel1 = new Label("Relationship:");
+		TextField IPC_relationship1 = new TextField();
+
+		Label IPC_relationshipLabel2 = new Label("Relationship:");
+		TextField IPC_relationship2 = new TextField();
+
+		Label IPC_providerLabel = new Label("Provider:");
+		TextField IPC_provider = new TextField();
+		IPC_providerLabel.setMinHeight(25);
+
+		Label IPC_pharmacyInfoLabel = new Label("Pharmacy Information");
+		IPC_pharmacyInfoLabel.setStyle(SMALLSUBTITLE_FORMAT);
+
+		Label IPC_pharNameLabel = new Label("Name:	");
+		Text IPC_pharName = new Text("Unknown");
+
+		Label IPC_pharAddrLabel = new Label("Address:	");
+		Text IPC_pharAddr = new Text("Unknown");
+
+		Label IPC_pharFaxLabel = new Label("Fax #:	");
+		Text IPC_pharFax = new Text("Unknown");
+
+		Label IPC_pharEmailLabel = new Label("Email:	");
+		Text IPC_pharEmail = new Text("Unknown");
+
+		Label IPC_insuranceInfoLabel = new Label("Insurance Information");
+		IPC_insuranceInfoLabel.setStyle(SMALLSUBTITLE_FORMAT);
+
+		Label IPC_insuranceNumLabel = new Label("Insurance #:");
+		TextField IPC_insuranceNum = new TextField();
+		IPC_insuranceNumLabel.setMinHeight(25);
+
+		Label IPC_phoneOnCardLabel = new Label("Phone # (on Card):");
+		TextField IPC_phoneOnCard = new TextField();
+		IPC_phoneOnCardLabel.setMinHeight(25);
+
+		Button IPC_backButton = new Button("Back");
+		IPC_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+
+		Button IPC_submitButton = new Button("Submit");
+		IPC_submitButton.setStyle(CSS_SUBMIT_BUTTON_STYLE);
+
+		//---- Setting Up Scene ----//
+
+		VBox IPC_leftBox1 = new VBox();
+		IPC_leftBox1.setStyle(CSS_BOX_STYLE);
+		IPC_leftBox1.getChildren().addAll(IPC_MRnLabel, IPC_patientNameLabel, IPC_dobLabel, IPC_patientNumLabel, IPC_emailLabel,
+				IPC_emergencyContactLabel1, IPC_nameLabel1, IPC_relationshipLabel1, IPC_phoneNumLabel1,
+				IPC_emergencyContactLabel2, IPC_nameLabel2, IPC_relationshipLabel2, IPC_phoneNumLabel2);
+		IPC_leftBox1.setStyle("-fx-border-color: transparent;");
+		IPC_leftBox1.setSpacing(15);
+
+		VBox IPC_rightBox1 = new VBox();
+		IPC_rightBox1.setStyle(CSS_BOX_STYLE);
+		IPC_rightBox1.getChildren().addAll(IPC_MRn, IPC_patientName, IPC_dob, IPC_patientNum, IPC_email,
+				IPC_name1, IPC_relationship1, IPC_phoneNum1,
+				IPC_name2, IPC_relationship2, IPC_phoneNum2);
+		IPC_rightBox1.setStyle("-fx-border-color: transparent;");
+		IPC_rightBox1.setSpacing(17);
+
+		VBox IPC_leftBox2 = new VBox();
+		IPC_leftBox2.setStyle(CSS_BOX_STYLE);
+		IPC_leftBox2.getChildren().addAll(IPC_pharmacyInfoLabel, IPC_pharNameLabel, IPC_pharAddrLabel, IPC_pharFaxLabel, IPC_pharEmailLabel,
+				IPC_insuranceInfoLabel, IPC_providerLabel, IPC_insuranceNumLabel, IPC_phoneOnCardLabel);
+		IPC_leftBox2.setStyle("-fx-border-color: transparent;");
+		IPC_leftBox2.setSpacing(15);
+
+		VBox IPC_rightBox2 = new VBox();
+		IPC_rightBox2.setStyle(CSS_BOX_STYLE);
+		IPC_rightBox2.getChildren().addAll(new Label("\n"), IPC_pharName,IPC_pharAddr, IPC_pharFax, IPC_pharEmail,
+				new Label("\n"), IPC_provider, IPC_insuranceNum, IPC_phoneOnCard);
+		IPC_rightBox2.setStyle("-fx-border-color: transparent;");
+		IPC_rightBox2.setSpacing(17);
+
+		HBox IPC_backBox = new HBox();
+		IPC_backBox.setStyle(CSS_BOX_STYLE);
+		IPC_backBox.setAlignment(Pos.CENTER_RIGHT);
+		IPC_backBox.setStyle("-fx-border-color: transparent;");
+		IPC_backBox.setSpacing(17);
+		IPC_backBox.getChildren().addAll(IPC_submitButton, IPC_backButton);
+
+		HBox IPC_innerBox = new HBox();
+		IPC_innerBox.setStyle(CSS_BOX_STYLE);
+		IPC_innerBox.setSpacing(20);
+		IPC_innerBox.getChildren().addAll(IPC_leftBox1, IPC_rightBox1, IPC_leftBox2, IPC_rightBox2);
+
+		VBox IPC_outerBox = new VBox();
+		IPC_outerBox.setStyle(CSS_BOX_STYLE);
+		IPC_outerBox.getChildren().addAll(IPC_insurePharContLabel, IPC_innerBox, IPC_backBox);
+
+
+		Scene insurePharContScene = new Scene(IPC_outerBox, 800, 600);
+		insurePharContScene.setFill(BACKGROUND);
+
 		
 //=========================================================================================================================//
 //
@@ -446,6 +847,12 @@ public class JavaFX extends Application
 		//primaryStage.setScene(patientPortalScene);
         //primaryStage.setScene(accountInfoScene);
 		//primaryStage.setScene(visitSummaryScene);
+		//primaryStage.setScene(pharmacyInfoScene);
+		//primaryStage.setScene(insuranceInfoScene);
+
+		//---- nurse portal ----//
+		//primaryStage.setScene(logVisitScene);
+		primaryStage.setScene(insurePharContScene);
 	}
 	
 	
