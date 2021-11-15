@@ -1,9 +1,13 @@
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -18,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.CSS;
+
 public class JavaFX extends Application
 {
 //======================== JavaFX Method ========================//
@@ -25,6 +31,7 @@ public class JavaFX extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		Scanner scan = new Scanner(System.in);
+
 
 		
 		
@@ -92,28 +99,29 @@ public class JavaFX extends Application
 		
 		
 	//======================== Sign In ========================//
-		Label SI_nameLabel = new Label("Full Name");
+		Label SI_nameLabel = new Label("Username");
+		SI_nameLabel.setStyle(SUBTITLE_FORMAT);
 		TextField SI_nameField = new TextField();
+		SI_nameField.setMaxWidth(200);
 		
 		Label SI_passLabel = new Label("Password");
+		SI_passLabel.setStyle(SUBTITLE_FORMAT);
 		PasswordField SI_passField = new PasswordField();
+		SI_passField.setMaxWidth(200);
 		
 		Button SI_siButton = new Button("Sign In");
 		
 		Label SI_newAccount = new Label("Don't have an account?");
+		SI_newAccount.setStyle(SMALLSUBTITLE_FORMAT);
 		Button SI_newAccountButton = new Button("Create Account");
 
 		
 		//===== Adding Elements to Frame =====//
-		VBox SI_userInfo = new VBox(PADDING_VALUE);
-		SI_userInfo.getChildren().addAll(patientIcon, SI_nameLabel, SI_nameField, SI_passLabel, SI_passField);
-		
-		VBox SI_buttons = new VBox(PADDING_VALUE);
-		SI_buttons.getChildren().addAll(SI_siButton, SI_newAccount, SI_newAccountButton);
-		
-		VBox SI_outerBox = new VBox();
+		VBox SI_outerBox = new VBox(PADDING_VALUE);
+		SI_outerBox.setAlignment(Pos.CENTER);
 		SI_outerBox.setStyle(CSS_BOX_STYLE);
-		SI_outerBox.getChildren().addAll(SI_userInfo, SI_buttons);
+		SI_outerBox.getChildren().addAll(patientIcon, SI_nameLabel, SI_nameField, SI_passLabel, SI_passField,
+				SI_siButton, new Label("\n\n"), SI_newAccount, SI_newAccountButton);
 		
 		Scene signInScene = new Scene(SI_outerBox, 800, 600);
 		signInScene.setFill(BACKGROUND);
@@ -123,32 +131,33 @@ public class JavaFX extends Application
 	//======================== Sign Up ========================//
 		Label SU_nameLabel = new Label("Full Name");
 		TextField SU_nameField = new TextField();
+		SU_nameField.setMaxWidth(400);
+		SU_nameLabel.setStyle(SUBTITLE_FORMAT);
 		
 		Label SU_passLabel = new Label("Password");
 		PasswordField SU_passField = new PasswordField();
+		SU_passField.setMaxWidth(400);
+		SU_passLabel.setStyle(SUBTITLE_FORMAT);
 		
 		Label SU_reenterPass = new Label("Re-enter Password");
 		PasswordField SU_reenterPassField = new PasswordField();
+		SU_reenterPassField.setMaxWidth(400);
+		SU_reenterPass.setStyle(SUBTITLE_FORMAT);
 		
 		Button SU_suButton = new Button("Create Account");
 		
 		Label SU_logIn = new Label("Already have an account?");
+		SU_logIn.setStyle(SMALLSUBTITLE_FORMAT);
 		Button SU_logInButton = new Button("Sign In");
 
 		
 		//===== Adding Elements to Frame =====//
-		VBox SU_passEnterBox = new VBox(PADDING_VALUE);
-		SU_passEnterBox.getChildren().addAll(SU_passLabel, SU_passField, SU_reenterPass, SU_reenterPassField);
-		
-		VBox SU_userInfo = new VBox(PADDING_VALUE);
-		SU_userInfo.getChildren().addAll(patientIcon, SU_nameLabel, SU_nameField, SU_passEnterBox);
-		
-		VBox SU_buttons = new VBox(PADDING_VALUE);
-		SU_buttons.getChildren().addAll(SU_suButton, SU_logIn, SU_logInButton);
-		
-		VBox SU_outerBox = new VBox();
+		VBox SU_outerBox = new VBox(PADDING_VALUE);
 		SU_outerBox.setStyle(CSS_BOX_STYLE);
-		SU_outerBox.getChildren().addAll(SU_userInfo, SU_buttons);
+		SU_outerBox.setAlignment(Pos.CENTER);
+		SU_outerBox.setSpacing(30);
+		SU_outerBox.getChildren().addAll(SU_nameLabel, SU_nameField,SU_passLabel, SU_passField, SU_reenterPass, SU_reenterPassField,
+				patientIcon, SU_suButton, SU_logIn, SU_logInButton);
 		
 		Scene signUpScene = new Scene(SU_outerBox, 800, 600);
 		signUpScene.setFill(BACKGROUND);
@@ -163,29 +172,54 @@ public class JavaFX extends Application
 		
 	//======================== Send Message ========================//
 		//----- Header -----//
+		Label SM_sendMessageLabel = new Label("Send a Message to:	");
+		SM_sendMessageLabel.setStyle(SUBTITLE_FORMAT);
+
 		ComboBox<String> SM_recipients = new ComboBox<String>();
 		SM_recipients.getItems().add("Recipient 1");
 		SM_recipients.getItems().add("Recipient 2");
 		SM_recipients.getItems().add("Recipient 3");
 		
 		TextField SM_subject = new TextField();
+		SM_subject.setMaxWidth(550);
 		SM_subject.setText("Subject");
 		
 		//----- Text Box -----//
 		Label SM_messageLabel = new Label("Message:");
+		SM_messageLabel.setStyle(SMALLSUBTITLE_FORMAT);
 		TextField SM_messageEntry = new TextField();
-		
+		SM_messageEntry.setMinHeight(350);
+
+		//---- Buttons ----//
+		Button SM_backButton = new Button("Back");
+		SM_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+		Button SM_sendButton = new Button("Send");
+		SM_sendButton.setStyle(CSS_SUBMIT_BUTTON_STYLE);
 		
 		//===== Adding Elements to Frame =====//
-		VBox SM_address = new VBox(PADDING_VALUE);
-		SM_address.getChildren().addAll(SM_recipients, SM_subject);
-		
-		VBox SM_message = new VBox(PADDING_VALUE);
-		SM_message.getChildren().addAll(SM_messageLabel, SM_messageEntry);
-		
+		HBox SM_headerBox = new HBox();
+		SM_headerBox.setSpacing(30);
+		SM_headerBox.setAlignment(Pos.CENTER);
+		SM_headerBox.getChildren().addAll(SM_sendMessageLabel, SM_recipients);
+		SM_headerBox.setStyle(CSS_BOX_STYLE);
+		SM_headerBox.setStyle("-fx-border-color: transparent;");
+
+		VBox SM_innerBox = new VBox();
+		SM_innerBox.setSpacing(20);
+		SM_innerBox.getChildren().addAll(SM_subject, SM_messageLabel, SM_messageEntry);
+
+		HBox SM_buttons = new HBox();
+		SM_buttons.setStyle(CSS_BOX_STYLE);
+		SM_buttons.setAlignment(Pos.CENTER_RIGHT);
+		SM_buttons.setSpacing(30);
+		SM_buttons.setStyle("-fx-border-color: transparent;");
+		SM_buttons.getChildren().addAll(SM_sendButton, SM_backButton);
+
 		VBox SM_outerBox = new VBox();
 		SM_outerBox.setStyle(CSS_BOX_STYLE);
-		SM_outerBox.getChildren().addAll(SM_address, SM_message, bottomButtons);
+		SM_outerBox.setSpacing(25);
+		SM_outerBox.getChildren().addAll(SM_headerBox, SM_innerBox, SM_buttons);
+
 		
 		Scene sendMessageScene = new Scene(SM_outerBox, 800, 600);
 		sendMessageScene.setFill(BACKGROUND);
@@ -259,16 +293,27 @@ public class JavaFX extends Application
 	//======================== Visit Summary ========================//
 		
 		Label VS_visitSummaryLabel = new Label("Visit Summary");
+		VS_visitSummaryLabel.setStyle(TITLE_FORMAT);
 		
 		TextField VS_visitSummaryText = new TextField();
+		VS_visitSummaryText.setEditable(false);
+		VS_visitSummaryText.setMinHeight(450);
+		VS_visitSummaryText.setMaxWidth(800);
 		
-		
+		Button VS_backButton = new Button("Back");
+		VS_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
 		
 		//===== Adding Elements to Frame =====//
+
+		HBox VS_buttons = new HBox();
+		VS_buttons.setStyle(CSS_BOX_STYLE);
+		VS_buttons.setAlignment(Pos.CENTER_RIGHT);
+		VS_buttons.setStyle("-fx-border-color: transparent;");
+		VS_buttons.getChildren().addAll(VS_backButton);
 		
 		VBox VS_outerBox = new VBox();
 		VS_outerBox.setStyle(CSS_BOX_STYLE);
-		VS_outerBox.getChildren().addAll(backButton, VS_visitSummaryLabel, VS_visitSummaryText);
+		VS_outerBox.getChildren().addAll(VS_visitSummaryLabel, VS_visitSummaryText, new Label("\n"), VS_buttons);
 		
 		// Visit Summary Scene
 		Scene visitSummaryScene = new Scene(VS_outerBox, 800, 600);
@@ -319,7 +364,11 @@ public class JavaFX extends Application
 		
 		Label AI_cEmailLabel = new Label("Email");
 		TextField AI_cEmail = new TextField();
-		
+
+		Button AI_backButton = new Button("Back");
+		AI_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+		Button AI_submitButton = new Button("Submit");
+		AI_submitButton.setStyle(CSS_SUBMIT_BUTTON_STYLE);
 		
 		//===== Adding Elements to Frame =====//
 		
@@ -382,16 +431,25 @@ public class JavaFX extends Application
         AI_contact.getChildren().addAll(AI_contactInfoLabel, AI_cAddress1Box, AI_cAddress2Box,
         		AI_cAddrInfoBox, AI_cPhoneBox, AI_cEmailBox);
         AI_contact.setStyle(CSS_BOX_STYLE);
+
+		// Buttons
+		HBox AI_buttons = new HBox();
+		AI_buttons.setStyle(CSS_BOX_STYLE);
+		AI_buttons.setStyle("-fx-border-color: transparent;");
+		AI_buttons.setAlignment(Pos.CENTER_RIGHT);
+		AI_buttons.setSpacing(30);
+		AI_buttons.getChildren().addAll(AI_submitButton, AI_backButton);
         
         
         //----- General -----//
         VBox AI_outerBox = new VBox();
-        AI_outerBox.getChildren().addAll(AI_profile, AI_birthday, AI_contact, bottomButtons);
+        AI_outerBox.getChildren().addAll(AI_profile, AI_birthday, AI_contact, AI_buttons);
         AI_outerBox.setStyle(CSS_BOX_STYLE);
         
         // accountInfoScene Scene
         Scene accountInfoScene = new Scene(AI_outerBox, 800, 600);
         accountInfoScene.setFill(BACKGROUND);
+
         
         
         
@@ -502,6 +560,7 @@ public class JavaFX extends Application
 
 		Button PI_backButton = new Button("Back");
 		PI_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
+
 
 		//===== Setting Up Scene =====//
 
@@ -818,13 +877,137 @@ public class JavaFX extends Application
 // Section: Doctor Portal Pages
 // Description: Pages shown for doctor type users (excluding pages already created for the nurse portal
 //
-//=========================================================================================================================//		
-		
-	
-		
-		
-		
-		
+//=========================================================================================================================//
+
+
+
+
+
+//=========================================================================================================================//
+//
+//Section:	Event Handling
+//Description:
+//
+//=========================================================================================================================//
+
+		//===== New Account button on Sign In page =====//
+		SI_newAccountButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(signUpScene);
+					}
+				});
+
+		//===== Back Button on Insurance Info Page =====//
+		II_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(patientPortalScene);
+					}
+				});
+
+		//===== Back Button on Log a Visit Page =====//
+		LV_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						// FIX THIS, NEEDS TO RETURN TO PATIENT/DOCTOR
+						primaryStage.setScene(patientPortalScene);
+					}
+				});
+
+		//===== Log In button on Sign Up Page =====//
+		SU_logInButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						// FIX THIS, NEEDS TO RETURN TO PATIENT/DOCTOR
+						primaryStage.setScene(signInScene);
+					}
+				});
+
+		//===== Back Button on Visit Summary Page =====//
+		VS_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(patientPortalScene);
+					}
+				});
+
+		//===== Back Button on Send Message Page =====//
+		SM_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						//FIX THIS, SHOULD GO TO MESSAGING PORTAL
+						primaryStage.setScene(patientPortalScene);
+					}
+				});
+
+		//===== Back button on Pharmacy Info Page =====//
+		PI_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(patientPortalScene);
+					}
+				});
+
+		//===== Insurance button on Patient Portal Page =====//
+		PP_insuranceButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(insuranceInfoScene);
+					}
+				});
+
+		//===== Pharmacy button on Patient Portal Page =====//
+		PP_pharmacyButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(pharmacyInfoScene);
+					}
+				});
+
+		//===== Messages button on Patient Portal Page =====//
+		PP_messagesButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						// FIX THIS, SHOULD GO TO MESSAGES PORTAL PAGE
+						primaryStage.setScene(pharmacyInfoScene);
+					}
+				});
+
+
+		//===== Visit Summary button on Patient Portal Page =====//
+		PP_visitsButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(visitSummaryScene);
+					}
+				});
+
+		//===== Account Settings button on Patient Portal Page =====//
+		PP_settingsButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(accountInfoScene);
+					}
+				});
+
+		//===== Log out button on Patient Portal Page =====//
+		PP_logOutButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(signInScene);
+					}
+				});
+
+		//===== Back button on Account Info Page =====//
+		AI_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(patientPortalScene);
+					}
+				});
+
+
 //=========================================================================================================================//
 //
 // Section: Scene Control
@@ -838,13 +1021,14 @@ public class JavaFX extends Application
 		//===== Testing Panels =====//
         
         //----- general scenes -----//
+
         //primaryStage.setScene(signInScene);
         //primaryStage.setScene(signUpScene);
         //primaryStage.setScene(sendMessageScene);
         //primaryStage.setScene(messagingPortalScene);
         
         //----- patient portal -----//
-		//primaryStage.setScene(patientPortalScene);
+		primaryStage.setScene(patientPortalScene);
         //primaryStage.setScene(accountInfoScene);
 		//primaryStage.setScene(visitSummaryScene);
 		//primaryStage.setScene(pharmacyInfoScene);
@@ -852,13 +1036,12 @@ public class JavaFX extends Application
 
 		//---- nurse portal ----//
 		//primaryStage.setScene(logVisitScene);
-		primaryStage.setScene(insurePharContScene);
+		//primaryStage.setScene(insurePharContScene);
 	}
 	
 	
 //======================== Main Method ========================//
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		Application.launch(args);
 	}
 
@@ -866,11 +1049,9 @@ public class JavaFX extends Application
 
 
 
-
 //=========================================================================================================================//
 //
-//Section: 
-//Description: 
+//Section:
+//Description:
 //
-//=========================================================================================================================//	
-
+//=========================================================================================================================//
