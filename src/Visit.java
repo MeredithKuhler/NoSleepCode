@@ -1,11 +1,11 @@
 public class Visit {
     private String date, allergies, healthConcerns, doctorNotes;
-    private int weight, height, temperature, bloodPressure;
+    private String weight, height, temperature, bloodPressure;
     private boolean overTwelve;
     private Prescription prescriptionGiven;
 
-    public Visit(String date, int weight, int height, int temperature, int bloodPressure, boolean overTwelve,
-                 String allergies, String healthConcerns, String doctorNotes) {
+    public Visit(String date, String weight, String height, String temperature, String bloodPressure, boolean overTwelve,
+                 String allergies, String healthConcerns/*, String doctorNotes*/) {
         this.date = date;
         this.weight = weight;
         this.height = height;
@@ -14,22 +14,22 @@ public class Visit {
         this.overTwelve = overTwelve;
         this.allergies = allergies;
         this.healthConcerns = healthConcerns;
-        this.doctorNotes = doctorNotes;
+        //this.doctorNotes = doctorNotes;
     }
 
     public String getDate() {
         return date;
     }
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
-    public int getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
-    public int getBloodPressure() {
+    public String getBloodPressure() {
         return bloodPressure;
     }
     public boolean isOverTwelve() {
@@ -59,16 +59,16 @@ public class Visit {
         this.prescriptionGiven = prescriptionGiven;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
-    public void setTemperature(int temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
-    public void setBloodPressure(int bloodPressure) {
+    public void setBloodPressure(String bloodPressure) {
         this.bloodPressure = bloodPressure;
     }
     public void setOverTwelve(boolean overTwelve) {

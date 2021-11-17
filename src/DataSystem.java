@@ -6,10 +6,12 @@ public class DataSystem {
     private ArrayList<Account> accountList;
     private Account currentUser;
     private Patient[] patientList;
+    private Patient currentPatient;
 
     public DataSystem(/*Account currentUser*/) {
         //this.currentUser = currentUser;
         this.accountList = new ArrayList<Account>();
+        this.currentPatient = null;
     }
 
     public void readAccountData() {
@@ -50,6 +52,7 @@ public class DataSystem {
         }
     }
 
+
     public void sendMessage(Account currentUser, Account otherUser, int otherUserID, Message message) {
         for (int i = 0; i < accountList.size(); i++) {
             if(accountList.get(i) == otherUser) {
@@ -77,5 +80,13 @@ public class DataSystem {
 
     public void setCurrentUser(Account currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public Patient getCurrentPatient(){
+        return this.currentPatient;
+    }
+
+    public void setCurrentPatient(Patient patient){
+        this.currentPatient = patient;
     }
 }

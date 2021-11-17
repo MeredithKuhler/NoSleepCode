@@ -20,6 +20,7 @@ public class Patient extends Account {
         previousVisits = new ArrayList<Visit>();
         emergencyContact = new ArrayList<EmergencyContact>();
         address = new Address();
+        previousVisits = new ArrayList<Visit>();
     }
 
     public String getDateOfBirth() {
