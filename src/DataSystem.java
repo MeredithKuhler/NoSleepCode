@@ -1,4 +1,3 @@
-//imports
 import java.io.*;
 import java.util.ArrayList;
 
@@ -8,14 +7,15 @@ public class DataSystem {
     private Account currentUser;
     private Patient[] patientList;
 
-    public DataSystem(Account currentUser) {
-        this.currentUser = currentUser;
+    public DataSystem(/*Account currentUser*/) {
+        //this.currentUser = currentUser;
         this.accountList = new ArrayList<Account>();
     }
 
     public void readAccountData() {
         try {
-            FileInputStream inFile = new FileInputStream("accounts.txt");
+            File file = new File("./TextFiles/accounts.txt");
+            FileInputStream inFile = new FileInputStream(file);
             ObjectInputStream inObj = new ObjectInputStream(inFile);
             this.accountList = (ArrayList<Account>) inObj.readObject();
         } catch (Exception ex) {
@@ -26,7 +26,7 @@ public class DataSystem {
     public void writeAccountData() {
         if (!this.accountList.isEmpty()) {
             try {
-                FileOutputStream outFile = new FileOutputStream("accounts.txt");
+                FileOutputStream outFile = new FileOutputStream("NoSleepCode-main/accounts.txt");
                 ObjectOutputStream outObj = new ObjectOutputStream(outFile);
                 outObj.writeObject(accountList);
                 outObj.close();

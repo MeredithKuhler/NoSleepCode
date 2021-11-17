@@ -1,37 +1,37 @@
 import java.util.ArrayList;
 
 public class Patient extends Account {
-    private int dateOfBirth;
-    private int phoneNumber;
+    private String dateOfBirth;
+    private String phoneNumber;
     private String emailAddress;
-    private ArrayList<Insurance> insurance;
+    private Insurance insurance;
     private Pharmacy pharmacy;
     private ArrayList<Visit> previousVisits;
     private ArrayList<EmergencyContact> emergencyContact;
     private Address address;
 
-    public Patient(String lastName, String firstName, String password, int ID, Inbox inbox) {
-        super(lastName, firstName, password, ID, inbox);
-        dateOfBirth = 0;
-        phoneNumber = 0;
-        emailAddress = " ";
-        insurance = new ArrayList<Insurance>();
-        pharmacy = new Pharmacy();
+    public Patient(String lastName, String firstName, String password, int ID, String userName) {
+        super(lastName, firstName, password, ID, userName);
+        dateOfBirth = "";
+        phoneNumber = "";
+        emailAddress = "";
+        insurance = new Insurance("","","","");
+        pharmacy = new Pharmacy("","", "",new Address("","","","",""));
         previousVisits = new ArrayList<Visit>();
         emergencyContact = new ArrayList<EmergencyContact>();
         address = new Address();
     }
 
-    public int getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
     public String getEmailAddress() {
         return emailAddress;
     }
-    public ArrayList<Insurance> getInsurance() {
+    public Insurance getInsurance() {
         return insurance;
     }
     public Pharmacy getPharmacy() {
@@ -47,17 +47,17 @@ public class Patient extends Account {
         return address;
     }
 
-    public void setDateOfBirth(int dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
     public void addInsurance(Insurance insurance) {
-        this.insurance.add(insurance);
+        this.insurance = insurance;
     }
     public void setPharmacy(Pharmacy pharmacy) {
         this.pharmacy = pharmacy;

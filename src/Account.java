@@ -6,13 +6,15 @@ public class Account implements Serializable {
     private String password;
     private int ID;
     private Inbox inbox;
+    private String userName;
 
-    public Account(String lastName, String firstName, String password, int ID, Inbox inbox) {
+    public Account(String lastName, String firstName, String password, int ID, String userName) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.password = password;
         this.ID = ID;
         this.inbox = new Inbox(ID);
+        this.userName = userName;
     }
 
     //Accessor
@@ -20,13 +22,17 @@ public class Account implements Serializable {
         return lastName;
     }
     public String getFirstName() {
-        return lastName;
+        return firstName;
     }
     public String getPassword() {
         return password;
     }
     public int getID() {
         return ID;
+    }
+
+    public String getUserName(){
+        return userName;
     }
 
     public void setLastName(String lastName) {
@@ -40,6 +46,10 @@ public class Account implements Serializable {
     }
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public void setUserName(String newName){
+        this.userName = newName;
     }
 
 }
