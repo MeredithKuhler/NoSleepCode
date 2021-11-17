@@ -19,9 +19,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import javax.swing.text.html.CSS;
 
 public class JavaFX extends Application
@@ -84,8 +85,6 @@ public class JavaFX extends Application
 		
 		
 		//----- Global Buttons -----//
-		Button PP_logOutButton = new Button("LOG OUT");
-		PP_logOutButton.setStyle(CSS_LOGOUT_BUTTON_STYLE);
 		
 		Button backButton = new Button("Back");
 		backButton.setStyle(CSS_BACK_BUTTON_STYLE);
@@ -242,45 +241,83 @@ public class JavaFX extends Application
 		
 		
 	//======================== Patient Portal ========================//
+		ImageView PP_patientIcon = new ImageView(userIcon);
+		PP_patientIcon.setFitHeight(100);
+		//PP_patientIcon.setFitWidth(50);
+		PP_patientIcon.setPreserveRatio(true);
+		
+		Button PP_logOutButton = new Button("LOG OUT");
+		PP_logOutButton.setStyle(CSS_LOGOUT_BUTTON_STYLE);
+		
 		Button PP_settingsButton = new Button("Account Settings");
 		
 		Label PP_patient = new Label("Patient Portal");
+		PP_patient.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		
 		
 		//----- Navigation Menu -----//
-		//Image PP_insuranceIcon = new Image();		
+		Image InsuranceIcon = new Image("InsuranceIcon.png");
+		ImageView PP_insuranceIcon = new ImageView(InsuranceIcon);
+		PP_insuranceIcon.setFitHeight(100);
+		PP_insuranceIcon.setPreserveRatio(true);
+		//button
 		Button PP_insuranceButton = new Button("Insurance");
-		//Image PP_pharmacyIcon = new Image();
+		
+		Image pharmacyIcon = new Image("pharmacyInfo.png");
+		ImageView PP_pharmacyIcon = new ImageView(pharmacyIcon);
+		PP_pharmacyIcon.setFitHeight(100);
+		PP_pharmacyIcon.setPreserveRatio(true);
+		//button
 		Button PP_pharmacyButton = new Button("Pharmacy Information");
-		//Image PP_messagesIcon = new Image();
+		
+		Image messagesIcon = new Image("messagesIcon.png");
+		ImageView PP_messagesIcon = new ImageView(messagesIcon);
+		PP_messagesIcon.setFitHeight(100);
+		PP_messagesIcon.setPreserveRatio(true);
+		//button
 		Button PP_messagesButton = new Button("Messages");
-		//Image PP_visitsIcon = new Image();
+		
+		Image visitsIcon = new Image("visitsIcon.png");
+		ImageView PP_visitsIcon = new ImageView(visitsIcon);
+		PP_visitsIcon.setFitHeight(100);
+		PP_visitsIcon.setPreserveRatio(true);
+		//button
 		Button PP_visitsButton = new Button("Visit Summary");
 		
 		
 		//===== Adding Elements to Frame =====//
 		
-		HBox PP_topButtons = new HBox(PADDING_VALUE);
-		PP_topButtons.setStyle(CSS_BOX_STYLE);
+		HBox PP_topButtons = new HBox(600);
 		PP_topButtons.getChildren().addAll(PP_logOutButton, PP_settingsButton);
 		
-		VBox PP_profile = new VBox();
-		PP_profile.getChildren().addAll(patientIcon, PP_patient);
-		PP_profile.setStyle(CSS_BOX_STYLE);
+		VBox PP_profile = new VBox(PADDING_VALUE);
+		PP_profile.getChildren().addAll(PP_patientIcon, PP_patient);
+		PP_profile.setAlignment(Pos.CENTER);
 		
-		HBox PP_navImagesBox = new HBox(PADDING_VALUE);
-		//PP_navImagesBox.getChildren().addAll(PP_insuranceIcon, PP_pharmacyIcon, PP_messagesIcon, PP_visitsIcon);
+		VBox PP_insurance = new VBox(PADDING_VALUE);
+		PP_insurance.getChildren().addAll(PP_insuranceIcon, PP_insuranceButton);
+		PP_insurance.setAlignment(Pos.CENTER);
 		
-		HBox PP_navButtonsBox = new HBox(PADDING_VALUE);
-		PP_navButtonsBox.getChildren().addAll(PP_insuranceButton, PP_pharmacyButton, PP_messagesButton, PP_visitsButton);
+		VBox PP_pharmacy  = new VBox(PADDING_VALUE);
+		PP_pharmacy.getChildren().addAll(PP_pharmacyIcon, PP_pharmacyButton);
+		PP_pharmacy.setAlignment(Pos.CENTER);
 		
-		VBox PP_navMenu = new VBox();
-		PP_navMenu.setStyle(CSS_BOX_STYLE);
-		PP_navMenu.getChildren().addAll(PP_navImagesBox, PP_navButtonsBox);
+		VBox PP_messages  = new VBox(PADDING_VALUE);
+		PP_messages.getChildren().addAll(PP_messagesIcon, PP_messagesButton);
+		PP_messages.setAlignment(Pos.CENTER);
+		
+		VBox PP_visitSummary  = new VBox(PADDING_VALUE);
+		PP_visitSummary.getChildren().addAll(PP_visitsIcon, PP_visitsButton);
+		PP_visitSummary.setAlignment(Pos.CENTER);
+
+		
+		HBox PP_navMenu = new HBox(50);
+		PP_navMenu.getChildren().addAll(PP_insurance, PP_pharmacy, PP_messages, PP_visitSummary);
+		PP_navMenu.setAlignment(Pos.CENTER);
 		
 		
 		//----- General -----//
-		VBox PP_outerBox = new VBox();
+		VBox PP_outerBox = new VBox(70);
 		PP_outerBox.getChildren().addAll(PP_topButtons, PP_profile, PP_navMenu);
 		PP_outerBox.setStyle(CSS_BOX_STYLE);
 		
@@ -605,7 +642,56 @@ public class JavaFX extends Application
 //
 //=========================================================================================================================//
 
-		//===== Patient Selection =====//
+		//======================== Nurse Portal ========================//
+		
+		Button NP_pSelectButton = new Button("Patient Selection");
+		NP_pSelectButton.setMinHeight(50);
+		
+		Image NP_pSelectPng = new Image("pSelectIcon.png");
+		ImageView NP_pSelectImage = new ImageView(NP_pSelectPng);
+		NP_pSelectImage.setFitHeight(100);
+		//NP_pSelectImage.setFitWidth(50);
+		NP_pSelectImage.setPreserveRatio(true);
+		
+		
+		Button NP_pMessageButton = new Button("Message Patient");
+		NP_pMessageButton.setMinHeight(50);
+		
+		Image NP_pMessagePng = new Image("pMessageIcon.png");
+		ImageView NP_pMessageImage = new ImageView(NP_pMessagePng);
+		NP_pMessageImage.setFitHeight(100);
+		//NP_pMessageImage.setFitWidth(50);
+		NP_pMessageImage.setPreserveRatio(true);
+		
+		
+		Button NP_logOut = new Button("Log Out");
+		NP_logOut.setStyle(CSS_LOGOUT_BUTTON_STYLE);
+		
+		
+		//----- Setting Up Scene -----//
+		
+		VBox NP_pSelect = new VBox(40);
+		NP_pSelect.getChildren().addAll(NP_pSelectImage, NP_pSelectButton);
+		
+		VBox NP_pMessage = new VBox(40);
+		NP_pMessage.getChildren().addAll(NP_pMessageImage, NP_pMessageButton);
+		
+		HBox NP_menu = new HBox(60);
+		NP_menu.getChildren().addAll(NP_pSelect, NP_pMessage);
+		NP_menu.setAlignment(Pos.CENTER);
+		
+		VBox NP_outerBox = new VBox(80);
+		NP_outerBox.setStyle(CSS_BOX_STYLE);
+		NP_outerBox.getChildren().addAll(NP_menu, NP_logOut);
+		NP_outerBox.setAlignment(Pos.CENTER);
+		
+		Scene nursePortalScene = new Scene(NP_outerBox, 800, 600);
+		nursePortalScene.setFill(BACKGROUND);
+		
+		
+		
+		
+		//======================== Patient Selection ========================//
 
 		Label PS_nameLabel = new Label("Patient Name:");
 		TextField PS_patientName = new TextField();
@@ -618,30 +704,78 @@ public class JavaFX extends Application
 
 		Button PS_editPatientFile = new Button("Edit Patient File");
 
+		
+		
+		
 
-		//===== Patient Information View =====//
+		//======================== Patient Information View ========================//
 
 		Label PIV_patientInfoViewLabel = new Label("Patient Information View");
+		PIV_patientInfoViewLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
-		Label PIV_logVisitLabel = new Label("Log a Visit");
-		//Button PIV_logVisitButton = new Button();
-		//Image PIV_logVisitIcon = new Image();
+		Button PIV_logVisit = new Button("Log a Visit");
+		Image logVisitIcon = new Image("logVisitIcon.png");
+		ImageView PIV_logVisitIcon = new ImageView(logVisitIcon);
+		PIV_logVisitIcon.setFitHeight(100);
+		PIV_logVisitIcon.setPreserveRatio(true);
 
-		Label PIV_previousVisitLabel = new Label("Previous Visits");
-		//Button PIV_prevVisitButton = new Button();
-		//Image PIV_prevVisitIcon = new Image();
+		Button PIV_previousVisit = new Button("Previous Visits");
+		Image prevVisitIcon = new Image("prevVisitsIcon.png");
+		ImageView PIV_prevVisitIcon = new ImageView(prevVisitIcon);
+		PIV_prevVisitIcon.setFitHeight(100);
+		PIV_prevVisitIcon.setPreserveRatio(true);
 
-		Label PIV_insPharContLabel = new Label("Insurance, Pharmacy and Contact");
-		//Button PIV_insPharContButton = new Button();
-		//Image PIV_insPharContIcon = new Image();
+		Button PIV_insPharCont = new Button("Insurance, Pharmacy and Contact");
+		Image patientContactIcon = new Image("patientContactIcon.png");
+		ImageView PIV_patientContactIcon = new ImageView(patientContactIcon);
+		PIV_patientContactIcon.setFitHeight(100);
+		PIV_patientContactIcon.setPreserveRatio(true);
 
-		Label PIV_sendPrescriptionLabel = new Label("Send a Prescription\n*Doctors Only*");
-		//Button PIV_sendPrescriptionButton = new Button();
-		//Image PIV_sendPrescriptionIcon = new Image();
+		Button PIV_sendPrescription = new Button("Send a Prescription\n*Doctors Only*");
+		ImageView PIV_prescriptionIcon = new ImageView(pharmacyIcon);
+		PIV_prescriptionIcon.setFitHeight(100);
+		PIV_prescriptionIcon.setPreserveRatio(true);
+		
+		Button PIV_back = new Button("Back");
+		PIV_back.setStyle(CSS_BACK_BUTTON_STYLE);
+		
+		//----- Setting Up Scene -----//
+		
+		VBox PIV_prescriptionBox = new VBox(PADDING_VALUE);
+		PIV_prescriptionBox.getChildren().addAll(PIV_prescriptionIcon, PIV_sendPrescription);
+		PIV_prescriptionBox.setAlignment(Pos.CENTER);
+		
+		VBox PIV_logVisitBox = new VBox(PADDING_VALUE);
+		PIV_logVisitBox.getChildren().addAll(PIV_logVisitIcon, PIV_logVisit);
+		PIV_logVisitBox.setAlignment(Pos.CENTER);
+		
+		VBox PIV_prevVisitBox = new VBox(PADDING_VALUE);
+		PIV_prevVisitBox.getChildren().addAll(PIV_prevVisitIcon, PIV_previousVisit);
+		PIV_prevVisitBox.setAlignment(Pos.CENTER);
+		
+		VBox PIV_contactBox = new VBox(PADDING_VALUE);
+		PIV_contactBox.getChildren().addAll(PIV_patientContactIcon, PIV_insPharCont);
+		PIV_contactBox.setAlignment(Pos.CENTER);
+		
+		HBox PIV_menu = new HBox(50);
+		PIV_menu.getChildren().addAll(PIV_prescriptionBox, PIV_logVisitBox, PIV_prevVisitBox, PIV_contactBox);
+		PIV_menu.setAlignment(Pos.CENTER);
+		
+		HBox PIV_buttonBox = new HBox();
+		PIV_buttonBox.getChildren().add(PIV_back);
+		PIV_buttonBox.setAlignment(Pos.BOTTOM_RIGHT);
+		
+		VBox PIV_outerBox = new VBox(50);
+		PIV_outerBox.getChildren().addAll(PIV_patientInfoViewLabel, PIV_menu, PIV_buttonBox);
+		PIV_outerBox.setStyle(CSS_BOX_STYLE);
+		PIV_outerBox.setAlignment(Pos.CENTER);
+		
+		Scene patientInfoViewScene = new Scene(PIV_outerBox, 800, 600);
+		patientInfoViewScene.setFill(BACKGROUND);
 
 
 
-		//===== Log a Visit =====//
+		//======================== Log a Visit ========================//
 
 		Label LV_logVisitLabel = new Label("Log a Visit");
 		LV_logVisitLabel.setStyle(TITLE_FORMAT);
@@ -725,7 +859,7 @@ public class JavaFX extends Application
 
 
 
-		//===== Previous Visits =====//
+		//======================== Previous Visits ========================//
 
 		Label PV_prevVisitsLabel = new Label("Previous Visits");
 
@@ -1028,15 +1162,17 @@ public class JavaFX extends Application
         //primaryStage.setScene(messagingPortalScene);
         
         //----- patient portal -----//
-		primaryStage.setScene(patientPortalScene);
+		//primaryStage.setScene(patientPortalScene);
         //primaryStage.setScene(accountInfoScene);
 		//primaryStage.setScene(visitSummaryScene);
 		//primaryStage.setScene(pharmacyInfoScene);
 		//primaryStage.setScene(insuranceInfoScene);
 
 		//---- nurse portal ----//
+		//primaryStage.setScene(nursePortalScene);
 		//primaryStage.setScene(logVisitScene);
 		//primaryStage.setScene(insurePharContScene);
+        primaryStage.setScene(patientInfoViewScene);
 	}
 	
 	
