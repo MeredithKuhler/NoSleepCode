@@ -1,10 +1,10 @@
 public class Insurance {
     private String providerName;
     private String subscriberName;
-    private int subscriberNum;
-    private int groupNumber;
+    private String subscriberNum;
+    private String groupNumber;
 
-    public Insurance(String providerName, String subscriberName, int subscriberNum, int groupNumber) {
+    public Insurance(String providerName, String subscriberName, String subscriberNum, String groupNumber) {
         this.providerName = providerName;
         this.subscriberName = subscriberName;
         this.subscriberNum = subscriberNum;
@@ -27,19 +27,19 @@ public class Insurance {
         this.subscriberName = subscriberName;
     }
 
-    public int getSubscriberNum() {
+    public String getSubscriberNum() {
         return subscriberNum;
     }
 
-    public void setSubscriberNum(int subscriberNum) {
+    public void setSubscriberNum(String subscriberNum) {
         this.subscriberNum = subscriberNum;
     }
 
-    public int getGroupNumber() {
+    public String getGroupNumber() {
         return groupNumber;
     }
 
-    public void setGroupNumber(int groupNumber) {
+    public void setGroupNumber(String groupNumber) {
         this.groupNumber = groupNumber;
     }
 }

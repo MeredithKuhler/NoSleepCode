@@ -1,10 +1,10 @@
 public class Pharmacy {
     private String name;
-    private int fax;
+    private String fax;
     private String email;
     private Address address;
 
-    public Pharmacy(String name, int fax, String email, Address address) {
+    public Pharmacy(String name, String fax, String email, Address address) {
         this.name = name;
         this.fax = fax;
         this.email = email;
@@ -22,11 +22,11 @@ public class Pharmacy {
         this.name = name;
     }
 
-    public int getFax() {
+    public String getFax() {
         return fax;
     }
 
-    public void setFax(int fax) {
+    public void setFax(String fax) {
         this.fax = fax;
     }
 
