@@ -1212,8 +1212,75 @@ public class JavaFX extends Application
 //
 //=========================================================================================================================//
 
+	
+		//======================== Send Prescription ========================//
+		
+		Label SP_header = new Label("Send Prescription");
+		SP_header.setStyle(TITLE_FORMAT);
+		
+		Label SP_medicationLabel = new Label("Medication");
+		SP_medicationLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		Label SP_dosageLabel = new Label("Medication");
+		SP_dosageLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		Label SP_quantityLabel = new Label("Qty.");
+		SP_quantityLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		Label SP_directionsLabel = new Label("Directions");
+		SP_directionsLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		
+		TextField SP_medication = new TextField();
+		TextField SP_dosage = new TextField();
+		TextField SP_quantity = new TextField();
+		TextField SP_directions = new TextField();
+		
+		
+		Label SP_pharmInfoLabel = new Label("Pharmacy Information");
+		SP_pharmInfoLabel.setStyle(SUBTITLE_FORMAT);
 
-
+		Label SP_nameLabel = new Label("Name");
+		Label SP_addressLabel = new Label("Address");
+		Label SP_faxLabel = new Label("Fax #");
+		Label SP_emailLabel = new Label("Email Address");
+		
+		TextField SP_name = new TextField();
+		TextField SP_address = new TextField();
+		TextField SP_fax = new TextField();
+		TextField SP_email = new TextField();
+		
+		Button SP_back = new Button("Back");
+		SP_back.setStyle(CSS_BACK_BUTTON_STYLE);
+		Button SP_prescribe = new Button("Prescribe");
+		SP_prescribe.setStyle(CSS_SUBMIT_BUTTON_STYLE);
+		
+		
+		//===== scene setup =====//
+		
+		VBox SP_med = new VBox(PADDING_VALUE);
+		SP_med.getChildren().addAll(SP_medicationLabel, SP_medication);
+		VBox SP_dos = new VBox(PADDING_VALUE);
+		SP_dos.getChildren().addAll(SP_dosageLabel, SP_dosage);
+		VBox SP_qty = new VBox(PADDING_VALUE);
+		SP_qty.getChildren().addAll(SP_quantityLabel, SP_quantity);
+		VBox SP_dir = new VBox(PADDING_VALUE);
+		SP_dir.getChildren().addAll(SP_directionsLabel, SP_directions);
+		
+		HBox SP_prescription = new HBox(PADDING_VALUE);
+		SP_prescription.getChildren().addAll(SP_med, SP_dos, SP_qty, SP_dir);
+		
+		VBox SP_pharmInfo = new VBox(PADDING_VALUE);
+		SP_pharmInfo.getChildren().addAll(SP_pharmInfoLabel, SP_nameLabel, SP_name, SP_addressLabel, SP_address);
+		SP_pharmInfo.getChildren().addAll(SP_faxLabel, SP_fax, SP_emailLabel, SP_email);
+		SP_pharmInfo.setStyle("-fx-background-color: LIGHTGRAY; -fx-border-color: LIGHTGRAY; -fx-border-width: 20;");
+		
+		HBox SP_buttons = new HBox(20);
+		SP_buttons.getChildren().addAll(SP_prescribe, SP_back);
+		
+		VBox SP_outerBox = new VBox(30);
+		SP_outerBox.getChildren().addAll(SP_header, SP_prescription, SP_pharmInfo, SP_buttons);
+		SP_outerBox.setStyle(CSS_BOX_STYLE);
+		SP_outerBox.setAlignment(Pos.CENTER);
+		
+		Scene sendPrescriptionScene = new Scene(SP_outerBox, 800, 600);
+		sendPrescriptionScene.setFill(BACKGROUND);
 
 
 //=========================================================================================================================//
@@ -1372,7 +1439,8 @@ public class JavaFX extends Application
 		//primaryStage.setScene(logVisitScene);
 		//primaryStage.setScene(insurePharContScene);
         //primaryStage.setScene(patientInfoViewScene);
-        primaryStage.setScene(previousVisitsScene);
+        //primaryStage.setScene(previousVisitsScene);
+        primaryStage.setScene(sendPrescriptionScene);
 	}
 	
 	
