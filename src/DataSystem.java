@@ -53,6 +53,7 @@ public class DataSystem {
     }
 
 
+    /*
     public void sendMessage(Account currentUser, Account otherUser, int otherUserID, Message message) {
         for (int i = 0; i < accountList.size(); i++) {
             if(accountList.get(i) == otherUser) {
@@ -60,6 +61,7 @@ public class DataSystem {
             }
         }
     }
+     */
 
     public Account getCurrentUser() {
         return currentUser;

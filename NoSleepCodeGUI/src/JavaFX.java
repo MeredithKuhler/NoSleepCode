@@ -33,7 +33,7 @@ public class JavaFX extends Application
 		Scanner scan = new Scanner(System.in);
 
 		DataSystem dataSystem = new DataSystem();
-		dataSystem.readAccountData();
+		//dataSystem.readAccountData();
 		//Patient currentPatient = new Patient("", "","",123, "");
 		
 		
@@ -190,8 +190,10 @@ public class JavaFX extends Application
 		Button MP_backButton = new Button("Back");
 		MP_backButton.setStyle(CSS_BACK_BUTTON_STYLE);
 
+		Button MP_loadButton = new Button("Load");
+
 		HBox MP_buttons = new HBox();
-		MP_buttons.getChildren().addAll(MP_sendButton, MP_backButton);
+		MP_buttons.getChildren().addAll(MP_loadButton, MP_sendButton, MP_backButton);
 		MP_buttons.setAlignment(Pos.CENTER_RIGHT);
 		MP_buttons.setSpacing(30);
 
@@ -219,9 +221,11 @@ public class JavaFX extends Application
 		SM_sendMessageLabel.setStyle(SUBTITLE_FORMAT);
 
 		ComboBox<String> SM_recipients = new ComboBox<String>();
+		/*
 		SM_recipients.getItems().add("Recipient 1");
 		SM_recipients.getItems().add("Recipient 2");
 		SM_recipients.getItems().add("Recipient 3");
+		*/
 		
 		TextField SM_subject = new TextField();
 		SM_subject.setMaxWidth(550);
@@ -934,7 +938,78 @@ public class JavaFX extends Application
 
 
 
-		//======================== Messaging Portal ========================//
+		//======================== Send Prescription ========================//
+
+		Label SP_header = new Label("Send Prescription");
+		SP_header.setStyle(TITLE_FORMAT);
+
+		Label SP_medicationLabel = new Label("Medication");
+		SP_medicationLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		Label SP_dosageLabel = new Label("Dosage");
+		SP_dosageLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		Label SP_quantityLabel = new Label("Qty.");
+		SP_quantityLabel.setStyle(SMALLSUBTITLE_FORMAT);
+		Label SP_directionsLabel = new Label("Directions");
+		SP_directionsLabel.setStyle(SMALLSUBTITLE_FORMAT);
+
+		TextField SP_medication = new TextField();
+		TextField SP_dosage = new TextField();
+		TextField SP_quantity = new TextField();
+		TextField SP_directions = new TextField();
+
+
+		Label SP_pharmInfoLabel = new Label("Pharmacy Information");
+		SP_pharmInfoLabel.setStyle(SUBTITLE_FORMAT);
+
+
+		Label SP_nameLabel = new Label("Name");
+		Label SP_addressLabel = new Label("Address");
+		Label SP_faxLabel = new Label("Fax #");
+		Label SP_emailLabel = new Label("Email Address");
+
+		TextField SP_name = new TextField();
+		TextField SP_address = new TextField();
+		TextField SP_fax = new TextField();
+		TextField SP_email = new TextField();
+
+		Button SP_back = new Button("Back");
+		SP_back.setStyle(CSS_BACK_BUTTON_STYLE);
+		Button SP_prescribe = new Button("Prescribe");
+		SP_prescribe.setStyle(CSS_SUBMIT_BUTTON_STYLE);
+
+
+		//===== scene setup =====//
+
+		VBox SP_med = new VBox(PADDING_VALUE);
+		SP_med.getChildren().addAll(SP_medicationLabel, SP_medication);
+		VBox SP_dos = new VBox(PADDING_VALUE);
+		SP_dos.getChildren().addAll(SP_dosageLabel, SP_dosage);
+		VBox SP_qty = new VBox(PADDING_VALUE);
+		SP_qty.getChildren().addAll(SP_quantityLabel, SP_quantity);
+		VBox SP_dir = new VBox(PADDING_VALUE);
+		SP_dir.getChildren().addAll(SP_directionsLabel, SP_directions);
+
+		HBox SP_prescription = new HBox(PADDING_VALUE);
+		SP_prescription.getChildren().addAll(SP_med, SP_dos, SP_qty, SP_dir);
+
+		VBox SP_pharmInfo = new VBox(PADDING_VALUE);
+		SP_pharmInfo.getChildren().addAll(SP_pharmInfoLabel, SP_nameLabel, SP_name, SP_addressLabel, SP_address);
+		SP_pharmInfo.getChildren().addAll(SP_faxLabel, SP_fax, SP_emailLabel, SP_email);
+		SP_pharmInfo.setStyle("-fx-background-color: LIGHTGRAY; -fx-border-color: LIGHTGRAY; -fx-border-width: 20;");
+
+		HBox SP_buttons = new HBox(20);
+		SP_buttons.getChildren().addAll(SP_prescribe, SP_back);
+
+		VBox SP_outerBox = new VBox(30);
+		SP_outerBox.getChildren().addAll(SP_header, SP_prescription, SP_pharmInfo, SP_buttons);
+		SP_outerBox.setStyle(CSS_BOX_STYLE);
+		SP_outerBox.setAlignment(Pos.CENTER);
+
+		Scene sendPrescriptionScene = new Scene(SP_outerBox, 800, 600);
+		sendPrescriptionScene.setFill(BACKGROUND);
+
+
+//=========================================================================================================================//
 
 
 
@@ -1081,11 +1156,68 @@ public class JavaFX extends Application
 					}
 				});
 
+		//===== Load button on Messaging Portal Page =====//
+		MP_loadButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						if(dataSystem.getCurrentUser() != null){
+							String messages = "";
+							Account current = dataSystem.getCurrentUser();
+							ArrayList<Message> receivedMessagesList = current.getInbox().getReceivedMessages();
+							if(receivedMessagesList.size() > 0){
+								for(int i = 0; i < receivedMessagesList.size(); i++){
+									messages = messages + "Received:\nSender: " + receivedMessagesList.get(i).getSender() +
+											"\nSubject: " + receivedMessagesList.get(i).getSubjectText() +
+											"\nText: " + receivedMessagesList.get(i).getMessageBody() +
+											"\n\n";
+								}
+							}
+							ArrayList<Message> sentMessagesList = current.getInbox().getSentMessages();
+							if(sentMessagesList.size() > 0){
+								for(int i = 0; i < sentMessagesList.size(); i++){
+									messages = messages + "Sent:\nSender: " + sentMessagesList.get(i).getSender() +
+											"\nSubject: " + sentMessagesList.get(i).getSubjectText() +
+											"\nText: " + sentMessagesList.get(i).getMessageBody() +
+											"\n\n";
+								}
+							}
+							MP_messagesText.setEditable(true);
+							MP_messagesText.setText(messages);
+							MP_messagesText.setEditable(false);
+						}
+					}
+				});
+
 		//===== Send button on Messaging Portal Page =====//
 		MP_sendButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e) {
+						for(int i = 0; i < dataSystem.getAccountList().size(); i++){
+							if(!SM_recipients.getItems().contains(dataSystem.getAccountList().get(i).getUserName())){
+								SM_recipients.getItems().add(dataSystem.getAccountList().get(i).getUserName());
+							}
+						}
 						primaryStage.setScene(sendMessageScene);
+					}
+				});
+
+		//===== Send button on send message scene =====//
+		SM_sendButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e) {
+						if(SM_recipients.getValue() != null && !SM_subject.getText().isEmpty() && !SM_messageEntry.getText().isEmpty()){
+							Message message = new Message(SM_recipients.getValue(), SM_subject.getText(), SM_messageEntry.getText(), dataSystem.getCurrentUser().getUserName());
+							for(int i = 0; i < dataSystem.getAccountList().size(); i++) {
+								Account account = dataSystem.getAccountList().get(i);
+								// Check if user and pass are equal
+								if (account.getUserName().equals(SM_recipients.getValue())){
+									account.getInbox().addReceivedMessages(message);
+									dataSystem.getCurrentUser().getInbox().addSentMessages(message);
+									MP_messagesText.clear();
+									primaryStage.setScene(messagingPortal);
+								}
+							}
+						}
 					}
 				});
 
@@ -1265,6 +1397,7 @@ public class JavaFX extends Application
 		SM_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e){
+						MP_messagesText.clear();
 						primaryStage.setScene(messagingPortal);
 					}
 				});
@@ -1328,8 +1461,20 @@ public class JavaFX extends Application
 		PP_messagesButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e){
-						// FIX THIS, SHOULD GO TO MESSAGES PORTAL PAGE
-						primaryStage.setScene(pharmacyInfoScene);
+						for(int i = 0; i < dataSystem.getAccountList().size(); i++){
+							SM_recipients.getItems().add(dataSystem.getAccountList().get(i).getUserName());
+						}
+						MP_messagesText.clear();
+						primaryStage.setScene(messagingPortal);
+					}
+				});
+
+		//===== Messages button on nurse Page =====//
+		NP_pMessageButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						MP_messagesText.clear();
+						primaryStage.setScene(messagingPortal);
 					}
 				});
 
@@ -1445,8 +1590,7 @@ public class JavaFX extends Application
 				new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e){
 						if(dataSystem.getCurrentUser() instanceof Doctor){
-							// FIX THIS, NEEDS TO DIRECT TO PRESCRIPTION SEND PAGE
-							primaryStage.setScene(nursePortalScene);
+							primaryStage.setScene(sendPrescriptionScene);
 						}
 					}
 				});
@@ -1540,6 +1684,23 @@ public class JavaFX extends Application
 					}
 				});
 
+		//===== back button on send prescription Page =====//
+		SP_back.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(patientInfoViewScene);
+					}
+				});
+
+		//===== send button on send prescription Page =====//
+		SP_prescribe.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e){
+						primaryStage.setScene(patientInfoViewScene);
+					}
+				});
+
+
 		//===== back button on Patient selection Page =====//
 		PS_backButton.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				new EventHandler<MouseEvent>(){
@@ -1552,7 +1713,6 @@ public class JavaFX extends Application
 		PS_editPatientFile.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e){
-						// FIX THIS, NOT WORKING
 						String firstName = PS_patientFirstName.getText();
 						String lastName = PS_lastName.getText();
 						String userName = PS_patientUsername.getText();
@@ -1603,7 +1763,8 @@ public class JavaFX extends Application
 		//primaryStage.setScene(insurePharContScene);
 		//primaryStage.setScene(patientInfoViewScene);
 		//primaryStage.setScene(patientSelection);
-		primaryStage.setScene(messagingPortal);
+		//primaryStage.setScene(messagingPortal);
+		//primaryStage.setScene(sendPrescriptionScene);
 	}
 
 

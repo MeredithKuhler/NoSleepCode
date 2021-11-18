@@ -1,15 +1,17 @@
 public class Message {
-    private int recipientID;
+    private String recipientID;
     private String subjectText;
     private String messageBody;
+    private String sender;
 
-    public Message(int recipientID, String subjectText, String messageBody) {
+    public Message(String recipientID, String subjectText, String messageBody, String sender) {
         this.recipientID = recipientID;
         this.subjectText = subjectText;
         this.messageBody = messageBody;
+        this.sender = sender;
     }
 
-    public int getRecipientID() {
+    public String getRecipientID() {
         return recipientID;
     }
     public String getSubjectText() {
@@ -18,8 +20,9 @@ public class Message {
     public String getMessageBody() {
         return messageBody;
     }
+    public String getSender(){ return sender; }
 
-    public void setRecipientID(int recipientID) {
+    public void setRecipientID(String recipientID) {
         this.recipientID = recipientID;
     }
     public void setSubjectText(String subjectText) {
@@ -28,4 +31,5 @@ public class Message {
     public void setMessageBody(String messageBody) {
         this.messageBody = messageBody;
     }
+    public void setSender(String sender){this.sender = sender;}
 }

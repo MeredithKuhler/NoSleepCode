@@ -51,5 +51,6 @@ public class Account implements Serializable {
     public void setUserName(String newName){
         this.userName = newName;
     }
+    public Inbox getInbox(){ return inbox;}
 
 }
